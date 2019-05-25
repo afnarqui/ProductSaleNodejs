@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos 
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Docker: Attach to Node",
+            "type": "node",
+            "request": "attach",
+            "localRoot":"${workspaceFolder}",
+            "remoteRoot": "/usr/src/app",
+            "port":9229,
+            "address": "localhost",
+            "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Docker: Attach to Node",
+            "address": "localhost",
+            "port":9229,
+            "localRoot":"${workspaceFolder}",
+            "remoteRoot": "/app",
+            "protocol": "inspector",
+            "restart": true,
+            "timeout": 5000,
+            "skipFiles": [
+                "/app/node_modules/**/*.js",
+                "<node_internals/**/*.js",
+                "<eval>/**/*.js"
+
+            ]
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+      - "8004:8004"
+    volumes:
+      - .:/app
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm start
+  postgres:
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
