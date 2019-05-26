@@ -1,13 +1,27 @@
 'use strict'
-const db = require('./') 
+const db = require('./')
 
 const debug = require('debug')('back-db:db')
+const inquirer = require('inquirer')
+const chalk = require('chalk')
+
+const prompt = inquirer.createPromptModule()
 
 async function setup () {
+  const answer = await prompt([{
+    type: 'confirm',
+    name: 'setup',
+    message: 'destroy database ?'
+  }])
+
+  if (!answer.setup) {
+    return console.log('Nothing')
+  }
+
   const config = {
     database: process.env.DB_NAME || 'postgres',
-    username: process.env.DB_USER || 'afn',
-    password: process.env.DB_PASS || 'afn',
+    username: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASS || 'postgres',
     host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: s => debug(s),
@@ -21,7 +35,7 @@ async function setup () {
 }
 
 function handleFatalError (err) {
-  console.error(err.message)
+  console.error(`${chalk.red('[error]')} ${err.message}`)
   console.error(err.stack)
   process.exit(1)
 }

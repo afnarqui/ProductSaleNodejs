@@ -4,6 +4,7 @@
     "description": "módulo para trabajar con la base de datos",
     "main": "index.js",
     "scripts": {
+        "test": "ava tests/ --verbose",
         "setup": "node setup",
         "build": "babel -w ./ -d build/ -s inline",
         "dev": "nodemon index.js --exec babel-node",
@@ -15,16 +16,22 @@
         "@babel/core": "^7.4.5",
         "@babel/node": "^7.4.5",
         "@babel/preset-env": "^7.4.5",
+        "ava": "^1.4.1",
         "babel-preset-es2015": "^6.24.1",
+        "babel-register": "^6.26.0",
         "nodemon": "^1.19.0",
+        "sqlite3": "^4.0.8",
         "standard": "^12.0.1"
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.4",
         "body-parser": "^1.18.2",
+        "chalk": "^2.4.2",
         "cors": "^2.8.4",
         "debug": "^4.1.1",
+        "defaults": "^1.0.3",
         "express": "^4.16.3",
+        "inquirer": "^6.3.1",
         "pg": "^7.11.0",
         "pg-hstore": "^2.3.2",
         "sequelize": "^5.8.6"
