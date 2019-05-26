@@ -1,14 +1,15 @@
 {
     "name": "back-db",
     "version": "1.0.0",
-    "description": "módulo para trabajar con la base de datos",
-    "main": "index.js",
+    "description": "module for work with the database",
+    "main": "server.js",
     "scripts": {
+        "tests": "SET DEBUG=node-api:* && ava tests/ --verbose",
         "test": "ava tests/ --verbose",
         "setup": "node setup",
         "build": "babel -w ./ -d build/ -s inline",
         "dev": "nodemon index.js --exec babel-node",
-        "start": "nodemon --inspect=0.0.0.0 --nolazy -L --exec \"babel-node\" index.js",
+        "start": "nodemon --inspect=0.0.0.0 --nolazy -L --exec \"babel-node\" server.js",
         "lint": "standard --fix"
     },
     "devDependencies": {
@@ -21,7 +22,8 @@
         "babel-register": "^6.26.0",
         "nodemon": "^1.19.0",
         "sqlite3": "^4.0.8",
-        "standard": "^12.0.1"
+        "standard": "^12.0.1",
+        "supertest": "^4.0.2"
     },
     "dependencies": {
         "@babel/polyfill": "^7.4.4",
