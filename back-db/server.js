@@ -3,11 +3,11 @@ const debug = require('debug')
 const http = require('http')
 const chalk = require('chalk')
 const express = require('express')
-
+const asyncify = require('express-asyncify')
 const api = require('./api')
 
 const port = process.env.PORT || 8004
-const app = express()
+const app = asyncify(express())
 const server = http.createServer(app)
 
 app.use('/api', api)

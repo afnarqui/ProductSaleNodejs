@@ -1,5 +1,4 @@
 'use strict'
-
 const Sequelize = require('sequelize')
 let sequelize = null
 
