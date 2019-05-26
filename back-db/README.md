@@ -46,4 +46,9 @@ GRANT ALL PRIVILEGES ON DATABASE postgres TO afn;
 ## install
 ```
 npm i debug --save
+npm i inquirer chalk --save
+npm install --save-dev ava
+npm install --save defaults
+npm install -g --save-dev sqlite3
+npm install --save-dev babel-register
 ```
