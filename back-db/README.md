@@ -54,4 +54,5 @@ npm install --save-dev babel-register
 npm install -g --save express
 npm install -g http
 npm install --save-dev supertest
+npm i --save express-asyncify
 ```

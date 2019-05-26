@@ -2,8 +2,20 @@
 
 const debug = require('debug')('back-api:routes')
 const express = require('express')
+const asyncify = require('express-asyncify')
+const db = require('./lib/db')
 
-const api = express.Router()
+const config = require('./config')
+
+const api = asyncify(express.Router())
+
+let services, User, ShoppingCart
+
+api.use('*', async (req, res, next) => {
+  if (!services) {
+    services = await db(config.db)
+  }
+})
 
 api.get('/users', (req, res) => {
   debug('request')
