@@ -3,6 +3,7 @@
 const setupDatabase = require('./lib/db')
 const setupUserModel = require('./models/user')
 const setupShoppingCart = require('./models/shoppingcart')
+const setupUser = require('./lib/user')
 const defaults = require('defaults')
 
 module.exports = async function (config) {
@@ -30,7 +31,7 @@ module.exports = async function (config) {
     await sequelize.sync({ force: true })
   }
 
-  const User = {}
+  const User = setupUser(UserModel)
   const ShoppingCart = {}
 
   return {

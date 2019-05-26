@@ -1,6 +1,6 @@
 'use strict'
 
-const debug = require('debug')('back:api:db')
+const debug = require('debug')
 
 module.exports = {
   db: {
