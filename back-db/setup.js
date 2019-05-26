@@ -1,6 +1,6 @@
 'use strict'
-const db = require('./')
 
+const db = require('./index.js')
 const debug = require('debug')('back-db:db')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
