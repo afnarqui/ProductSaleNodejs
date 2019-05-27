@@ -62,4 +62,5 @@ npm install jsonwebtoken --save
 npm install --save express-jwt
 npm install --save json
 npm install --save-dev nyc
+npm i uuid --save
 ```

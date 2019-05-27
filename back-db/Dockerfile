@@ -14,6 +14,6 @@ COPY --chown=node:node . .
 
 EXPOSE 8080
 EXPOSE 3000 9229 8004
-CMD [ "npm", "start" ]
+CMD [ "npm", "prod" ]
 
 

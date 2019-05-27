@@ -9,6 +9,7 @@
         "build": "babel -w ./ -d build/ -s inline",
         "dev": "nodemon index.js --exec babel-node",
         "start": "nodemon --inspect=0.0.0.0 --nolazy -L --exec \"babel-node\" server.js",
+        "prod": "nodemon --exec \"babel-node\" server.js",
         "lint": "standard --fix"
     },
     "devDependencies": {
@@ -40,7 +41,8 @@
         "jsonwebtoken": "^8.5.1",
         "pg": "^7.11.0",
         "pg-hstore": "^2.3.2",
-        "sequelize": "^5.8.6"
+        "sequelize": "^5.8.6",
+        "uuid": "^3.3.2"
     },
     "keywords": [],
     "author": "andresnaranjo@afnarqui.com",
