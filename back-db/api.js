@@ -149,7 +149,7 @@ api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
   
   let dataProduct = []
   let value = []
-  Request.get(api, async (error, response, body) => {
+  return Request.get(api, async (error, response, body, next) => {
     if(error) {
         return next(error);
     }
@@ -164,16 +164,16 @@ api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
       idProducto: idProducto,
       cantidadDisponible:cantidadDisponible,
       quantity: quantity,
-      price:price
+      price:price,
+      totalPrice:0
     }
       value = await shoppingCart.findAllExistsShoppingCart(dataProcess)
+      return res.send(value)
     } catch (e) {
       return next(e)
     }
-    return value
   })
-  return res.send(value)
-  next()
+  
 })
 
 /**
