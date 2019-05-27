@@ -63,4 +63,6 @@ npm install --save express-jwt
 npm install --save json
 npm install --save-dev nyc
 npm i uuid --save
+npm install request --save
+npm install --save bluebird
 ```
