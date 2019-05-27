@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "9215c240-8eba-47ea-906b-6f868cdcec4b",
+		"name": "product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "a@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"id\":7,\"title\": \"el 7\", \"description\": \"7 desc\"}"
+				},
+				"url": {
+					"raw": "https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/1",
+					"protocol": "https",
+					"host": [
+						"fvwzxk56cg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"mock",
+						"productos",
+						"1"
+					]
+				},
+				"description": "https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/shoppingcarts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/shoppingcarts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"shoppingcarts"
+					]
+				},
+				"description": "GET / shoppingcarts"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFmbmFycXVpIiwiaWF0IjoxNTU4OTE1NDEyfQ.uNPy_uOd2k6l4CvvjzCZudkPlylMVIliDDA6AViKM2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"id\": 5,\n            \"uuid\": \"abcd-abcd-100\",\n            \"name\": \"datos principales\",\n            \"state\": false,\n            \"createdAt\": \"2019-05-23T05:05:02.000Z\",\n            \"updatedAt\": \"2019-05-26T05:00:00.000Z\"\n }"
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/users?name=andres&id=100&uuid=afn-afn-abcd&state=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "andres"
+						},
+						{
+							"key": "id",
+							"value": "100"
+						},
+						{
+							"key": "uuid",
+							"value": "afn-afn-abcd"
+						},
+						{
+							"key": "state",
+							"value": "false"
+						}
+					]
+				},
+				"description": "GET / users"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/users/afn",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/users/afn",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"users",
+						"afn"
+					]
+				},
+				"description": "GET /:uuid   users"
+			},
+			"response": []
+		},
+		{
+			"name": "https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "a@gmail.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"id\":7,\"title\": \"el 7\", \"description\": \"7 desc\"}"
+				},
+				"url": {
+					"raw": "https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/1",
+					"protocol": "https",
+					"host": [
+						"fvwzxk56cg",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"mock",
+						"productos",
+						"1"
+					]
+				},
+				"description": "GET / product"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/users?name=andres&id=100&uuid=afn-afn-abcd&state=false",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFmbmFycXVpIiwiaWF0IjoxNTU4OTE1NDEyfQ.uNPy_uOd2k6l4CvvjzCZudkPlylMVIliDDA6AViKM2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"id\": 5,\n            \"uuid\": \"abcd-abcd-100\",\n            \"name\": \"datos principales\",\n            \"state\": false,\n            \"createdAt\": \"2019-05-23T05:05:02.000Z\",\n            \"updatedAt\": \"2019-05-26T05:00:00.000Z\"\n }"
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/users?name=andres&id=100&uuid=afn-afn-abcd&state=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "andres"
+						},
+						{
+							"key": "id",
+							"value": "100"
+						},
+						{
+							"key": "uuid",
+							"value": "afn-afn-abcd"
+						},
+						{
+							"key": "state",
+							"value": "false"
+						}
+					]
+				},
+				"description": "POST / users"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/users?uuid=f8a74960-802c-11e9-949f-ff7a5750e883",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFmbmFycXVpIiwiaWF0IjoxNTU4OTE1NDEyfQ.uNPy_uOd2k6l4CvvjzCZudkPlylMVIliDDA6AViKM2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/users?uuid=f8a74960-802c-11e9-949f-ff7a5750e883",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "f8a74960-802c-11e9-949f-ff7a5750e883"
+						}
+					]
+				},
+				"description": "DELETE / users"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/shoppingcarts?idProducto=1&quantity=2&uuid=7",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFmbmFycXVpIiwiaWF0IjoxNTU4OTE1NDEyfQ.uNPy_uOd2k6l4CvvjzCZudkPlylMVIliDDA6AViKM2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/shoppingcarts?idProducto=1&quantity=2&uuid=7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"shoppingcarts"
+					],
+					"query": [
+						{
+							"key": "idProducto",
+							"value": "1"
+						},
+						{
+							"key": "quantity",
+							"value": "2"
+						},
+						{
+							"key": "uuid",
+							"value": "7"
+						}
+					]
+				},
+				"description": "POST / shoppingcarts"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8004/api/shoppingcarts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8004/api/shoppingcarts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8004",
+					"path": [
+						"api",
+						"shoppingcarts"
+					]
+				},
+				"description": "GET / shoppingcart"
+			},
+			"response": []
+		}
+	]
+}

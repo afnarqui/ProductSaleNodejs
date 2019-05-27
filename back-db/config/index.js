@@ -14,5 +14,6 @@ module.exports = {
   auth: {
     secret: process.env.SECRET || 'afn'
   },
-  port: 8004
+  port: 8004,
+  apiProduct: 'https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/afn:afn'
 }

@@ -10,7 +10,10 @@ const api = asyncify(express.Router())
 const auth = require('express-jwt')
 const uuid = require('uuid/v1')
 let services, User, shoppingCart
-
+var Request = require("request");
+/**
+ * middleware connectiong database
+ */
 api.use('*', async function (req, res, next) {
   console.log('Connecting to database')
   debug(`${chalk.green('Connecting to database')}`)
@@ -29,6 +32,9 @@ api.use('*', async function (req, res, next) {
   next()
 })
 
+/**
+ * crud user get all 
+ */
 api.get('/users', auth(config.auth), async (req, res, next) => {
   let users = []
   try {
@@ -40,6 +46,9 @@ api.get('/users', auth(config.auth), async (req, res, next) => {
   res.send({ users })
 })
 
+/**
+ * crud user get for uuid 
+ */
 api.get('/users/:uuid', async (req, res, next) => {
   const { uuid } = req.params
 
@@ -56,6 +65,9 @@ api.get('/users/:uuid', async (req, res, next) => {
   res.send({ users })
 })
 
+/**
+ * crud user post add or update
+ */
 api.post('/users', auth(config.auth), async (req, res, next) => {
   let Uuid = null
   let state = false
@@ -75,8 +87,11 @@ api.post('/users', auth(config.auth), async (req, res, next) => {
    return next(e)
  }
  next()
-});
+})
 
+/**
+ * crud user delete
+ */
 api.delete('/users', auth(config.auth), async (req, res, next) => {
  if(req.query.uuid === null) {
     return next(new Error('uuid is required'))
@@ -94,6 +109,9 @@ api.delete('/users', auth(config.auth), async (req, res, next) => {
  next()
 });
 
+/**
+ * crud shoppingcarts all
+ */
 api.get('/shoppingcarts', async (req, res, next) => {
   let shoppingcart = []
   try {
@@ -109,6 +127,51 @@ api.get('/shoppingcarts/:id', (req, res) => {
   res.send({ id })
 })
 
+/**
+ * crud shoppingcarts post add or update
+ * userId = uuid entity users field uuid
+ * idProducto = idProducto of the api https://fvwzxk56cg.execute-api.us-east-1.amazonaws.com/mock/productos/1
+ */
+api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
+  
+  if(req.query.userId === undefined || req.query.userId === null ||
+     req.query.idProducto === undefined || req.query.idProducto === null
+     || req.query.quantity === undefined || req.query.quantity === null || parseInt(req.query.quantity) <= 0 ) {
+    return next(new Error('the field quantity and idProducto and uuid is required'))
+  }
+  let userId = req.query.userId
+  let quantityUser = 0
+  let id = parseInt(req.query.idProducto)
+  let api = config.apiProduct
+  quantityUser = parseInt(req.query.quantity)
+
+  api = api.replace('afn:afn',id)
+  
+  let dataProduct = []
+  let value = []
+  Request.get(api, async (error, response, body) => {
+    if(error) {
+        return next(error);
+    }
+    dataProduct = JSON.parse(body)
+
+    let cantidadDisponible = dataProduct.cantidadDisponible
+    let idProducto = dataProduct.idProducto
+    let quantity = quantityUser === undefined ? 0 : quantityUser
+    try {
+      value = await shoppingCart.findAllExistsShoppingCart(userId,idProducto,cantidadDisponible,quantity)
+    } catch (e) {
+      return next(e)
+    }
+    return value
+  })
+  return res.send(value)
+  next()
+})
+
+/**
+ * return Fatal error
+ */
 function handleFatalError (err) {
   console.error(err.message)
   console.error(err.stack)
