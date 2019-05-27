@@ -6,6 +6,8 @@
 
 productSaleNodejs is a aplication, for save products and saleing. developed in Nodejs,Postgres, with docker and ec2
 
+[Api rest](https://documenter.getpostman.com/view/7654104/S1TSYeSr) documentation api rest
+
 [trello](https://trello.com/b/D7zo270M) Trello
 
 And of course ProductSaleNode itself is open source with a [public repository][afn]
