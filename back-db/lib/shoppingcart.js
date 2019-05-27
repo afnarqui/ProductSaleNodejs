@@ -1,9 +1,15 @@
 'use strict'
 const Promise = require("bluebird");
 module.exports = function setupShoppingCart (ShoppingCartModel) {
+  /**
+ * logic for search shoppingcart all
+ */
   async function findAllShoppingCart () {
     return ShoppingCartModel.findAll()
   }
+  /**
+ * logic for search shoppingcart for userId
+ */
   async function findByUserId (userId) {
     return ShoppingCartModel.findAll({
       where: {
@@ -11,6 +17,9 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
       }
     })
   }
+  /**
+ * logic for search shoppingcart for userId and idProducto
+ */
   async function findByUserIdProductId (userId,idProducto) {
     return ShoppingCartModel.findAll({
       where: {
@@ -19,7 +28,9 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
       }
     })
   }
-
+  /**
+ * logic for delete shoppingcart
+ */
   async function deleteShoppingCart (shoppingcarts) {
     
     if (!shoppingcarts.id) {
@@ -32,7 +43,9 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
         }
     })
 }
-  
+  /**
+ * logic for search shoppingcart
+ */
   async function findOneShoppingCart (uuid,idProducto) {
     const cond = {
       where: {
@@ -47,7 +60,9 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
     }
     return []
   }
-
+/**
+ * logic for work with shoppingcart
+ */
   async function findAllExistsShoppingCart (dataProcess) {
     let items = [
       {
@@ -86,7 +101,6 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
           return Promise.resolve(dataCompleta)
       })
       .then((res)=>{
-        // let idProducto = res.length>0 ? res[0]['idProducto'] : 0
         return ShoppingCartModel.findAll({ where: {} })
         .then((res)=>{
           let quantity = 0

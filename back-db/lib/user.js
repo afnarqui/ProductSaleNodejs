@@ -1,6 +1,9 @@
 'use strict'
 
 module.exports = function setupUser (UserModel) {
+ /**
+ * logic for create or update user 
+ */
   async function createOrUpdate (user) {
     const cond = {
       where: {
@@ -18,7 +21,9 @@ module.exports = function setupUser (UserModel) {
     const result = await UserModel.create(user)
     return result.toJSON()
   }
-
+  /**
+ * logic for delete user 
+ */
   async function deleteUser (user) {
     
     if (!user.uuid) {
@@ -31,7 +36,9 @@ module.exports = function setupUser (UserModel) {
         }
     });
 }
-
+  /**
+ * logic for search user all
+ */
   function findAll () {
     return UserModel.findAll()
   }
@@ -41,6 +48,9 @@ module.exports = function setupUser (UserModel) {
       }
     })
   }
+  /**
+ * logic for search user with uuid
+ */
   function findByUuid (uuid) {
     return UserModel.findOne({
       where: {

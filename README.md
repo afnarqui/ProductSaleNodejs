@@ -25,12 +25,31 @@ to run.
 Install the dependencies and devDependencies previous
 start the server.
 
+## download
 ```sh
 git clone https://github.com/afnarqui/ProductSaleNodejs.git
 cd ProductSaleNodejs
 docker-compose up --build
 http://localhost:8004/
 
+```
+
+## exec back
+```
+docker exec -it back bash
+npm run setup
+exit
+docker exec -it psql psql -U postgres
+GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;  
+\q
+docker exec -it back bash
+npm run start
+```
+
+## exec dockerhub
+```
+docker tag back-db_app afnarqui/productsalenode
+docker push afnarqui/productsalenode
 ```
 
    [afn]: <https://github.com/afnarqui/ProductSaleNodejs>
