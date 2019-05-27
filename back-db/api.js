@@ -154,12 +154,19 @@ api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
         return next(error);
     }
     dataProduct = JSON.parse(body)
-
+    let price = dataProduct.precio
     let cantidadDisponible = dataProduct.cantidadDisponible
     let idProducto = dataProduct.idProducto
     let quantity = quantityUser === undefined ? 0 : quantityUser
     try {
-      value = await shoppingCart.findAllExistsShoppingCart(userId,idProducto,cantidadDisponible,quantity)
+      let dataProcess = {
+      userId: userId,
+      idProducto: idProducto,
+      cantidadDisponible:cantidadDisponible,
+      quantity: quantity,
+      price:price
+    }
+      value = await shoppingCart.findAllExistsShoppingCart(dataProcess)
     } catch (e) {
       return next(e)
     }

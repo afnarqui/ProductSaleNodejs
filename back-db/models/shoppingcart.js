@@ -14,6 +14,11 @@ module.exports = function setupShoppingCartModel (config) {
     quantity: {
       type: Sequelize.INTEGER,
       allowNull: false
+    },
+    price: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      defaultValue: 0
     }
   })
 }

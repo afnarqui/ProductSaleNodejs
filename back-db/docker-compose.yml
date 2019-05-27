@@ -3,6 +3,7 @@ services:
   app:
     build: .
     container_name: "back"
+    restart: always
     depends_on:
       - postgres
     ports:
@@ -13,10 +14,11 @@ services:
       - .:/app
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: npm run prod
+    command: node server
   postgres:
     image: postgres:11.2-alpine
     container_name: "psql"
+    restart: always
     ports:
       - "5432:5432"
       - "8080:8080"
