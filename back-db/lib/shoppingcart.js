@@ -4,7 +4,22 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
   async function findAllShoppingCart () {
     return ShoppingCartModel.findAll()
   }
-
+  async function findByUserId (userId) {
+    return ShoppingCartModel.findAll({
+      where: {
+        userId
+      }
+    })
+  }
+  async function findByUserIdProductId (userId,idProducto) {
+    return ShoppingCartModel.findAll({
+      where: {
+        userId,
+        idProducto
+      }
+    })
+  }
+  
   async function findOneShoppingCart (uuid,idProducto) {
     const cond = {
       where: {
@@ -127,6 +142,8 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
   return {
     findAllShoppingCart,
     findAllExistsShoppingCart,
-    findOneShoppingCart
+    findOneShoppingCart,
+    findByUserId,
+    findByUserIdProductId
   }
 }

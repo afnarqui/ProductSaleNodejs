@@ -122,9 +122,26 @@ api.get('/shoppingcarts', async (req, res, next) => {
   res.send({ shoppingcart })
 })
 
-api.get('/shoppingcarts/:id', (req, res) => {
-  const { id } = req.params
-  res.send({ id })
+api.get('/shoppingcarts/:userId', auth(config.auth), async (req, res) => {
+  const { userId } = req.params
+  let shoppingcart = []
+  try {
+    shoppingcart = await shoppingCart.findByUserId(userId)
+  } catch (e) {
+    return next(e)
+  }
+  res.send({ shoppingcart })
+})
+
+api.get('/shoppingcarts/:userId/:idProducto', auth(config.auth), async (req, res) => {
+  const { userId , idProducto } = req.params
+  let shoppingcart = []
+  try {
+    shoppingcart = await shoppingCart.findByUserIdProductId(userId,idProducto)
+  } catch (e) {
+    return next(e)
+  }
+  res.send({ shoppingcart })
 })
 
 /**
