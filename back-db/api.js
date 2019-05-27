@@ -122,9 +122,26 @@ api.get('/shoppingcarts', async (req, res, next) => {
   res.send({ shoppingcart })
 })
 
-api.get('/shoppingcarts/:id', (req, res) => {
-  const { id } = req.params
-  res.send({ id })
+api.get('/shoppingcarts/:userId', auth(config.auth), async (req, res) => {
+  const { userId } = req.params
+  let shoppingcart = []
+  try {
+    shoppingcart = await shoppingCart.findByUserId(userId)
+  } catch (e) {
+    return next(e)
+  }
+  res.send({ shoppingcart })
+})
+
+api.get('/shoppingcarts/:userId/:idProducto', auth(config.auth), async (req, res) => {
+  const { userId , idProducto } = req.params
+  let shoppingcart = []
+  try {
+    shoppingcart = await shoppingCart.findByUserIdProductId(userId,idProducto)
+  } catch (e) {
+    return next(e)
+  }
+  res.send({ shoppingcart })
 })
 
 /**
@@ -149,7 +166,7 @@ api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
   
   let dataProduct = []
   let value = []
-  Request.get(api, async (error, response, body) => {
+  return Request.get(api, async (error, response, body, next) => {
     if(error) {
         return next(error);
     }
@@ -164,16 +181,16 @@ api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
       idProducto: idProducto,
       cantidadDisponible:cantidadDisponible,
       quantity: quantity,
-      price:price
+      price:price,
+      totalPrice:0
     }
       value = await shoppingCart.findAllExistsShoppingCart(dataProcess)
+      return res.send(value)
     } catch (e) {
       return next(e)
     }
-    return value
   })
-  return res.send(value)
-  next()
+  
 })
 
 /**

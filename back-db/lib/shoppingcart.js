@@ -4,7 +4,22 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
   async function findAllShoppingCart () {
     return ShoppingCartModel.findAll()
   }
-
+  async function findByUserId (userId) {
+    return ShoppingCartModel.findAll({
+      where: {
+        userId
+      }
+    })
+  }
+  async function findByUserIdProductId (userId,idProducto) {
+    return ShoppingCartModel.findAll({
+      where: {
+        userId,
+        idProducto
+      }
+    })
+  }
+  
   async function findOneShoppingCart (uuid,idProducto) {
     const cond = {
       where: {
@@ -37,6 +52,7 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
       cantidadDisponible: dataProcess.cantidadDisponible,
       quantity: dataProcess.quantity,
       price:dataProcess.price,
+      totalPrice:dataProcess.totalPrice,
       exist:false,
       queHago:false,message:'Success'
     })
@@ -57,24 +73,28 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
           return Promise.resolve(dataCompleta)
       })
       .then((res)=>{
-        let idProducto = res.length>0 ? res[0]['idProducto'] : 0
-        return ShoppingCartModel.findAll({
-          where: {
-            idProducto
-          }
-        })
+        // let idProducto = res.length>0 ? res[0]['idProducto'] : 0
+        return ShoppingCartModel.findAll({ where: {} })
         .then((res)=>{
           let quantity = 0
           let price = 0
+          let totalPrice = 0
           for (var i = 0; i < res.length; i++) {
-            if (res[i]['userId'] !== parseInt(dataCompleta[0]['userId'])) {
+            if (res[i]['idProducto'] === dataCompleta[0]['idProducto'] &&
+              res[i]['userId'] !== parseInt(dataCompleta[0]['userId'])) {
               quantity+= res[i]['quantity']
               price+=res[i]['price']
+            } else {
+              if( res[i]['userId'] === parseInt(dataCompleta[0]['userId']) &&
+                  res[i]['idProducto'] !== dataCompleta[0]['idProducto']){
+                totalPrice+= res[i]['price'] * res[i]['quantity']
+              }
             } 
           }
           if (dataCompleta[0]['quantity'] + quantity <= dataCompleta[0]['cantidadDisponible']) {
             dataCompleta[0]['queHago'] = true
             dataCompleta[0]['price'] = price === 0 ? dataCompleta[0]['price'] : price
+            dataCompleta[0]['totalPrice'] = totalPrice === 0 ? dataCompleta[0]['price'] * dataCompleta[0]['quantity'] : dataCompleta[0]['price'] * dataCompleta[0]['quantity'] + totalPrice
           }else {
             dataCompleta[0]['queHago'] = false
           }
@@ -112,14 +132,18 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
         })
       }
     }else {
-      dataCompleta[0]['message'] = 'warning that the value is not validated'
-      return Promise.resolve(dataCompleta);
+      let dataCompletaNull = []
+      dataCompletaNull.push({
+        message: 'warning that the value is not validated'})
+      return Promise.resolve(dataCompletaNull);
     }
   })
 }
   return {
     findAllShoppingCart,
     findAllExistsShoppingCart,
-    findOneShoppingCart
+    findOneShoppingCart,
+    findByUserId,
+    findByUserIdProductId
   }
 }
