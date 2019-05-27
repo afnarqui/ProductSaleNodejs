@@ -2,8 +2,9 @@
 
 const setupDatabase = require('./lib/db')
 const setupUserModel = require('./models/user')
-const setupShoppingCart = require('./models/shoppingcart')
+const setupShoppingCartModel = require('./models/shoppingcart')
 const setupUser = require('./lib/user')
+const setupShoppingCart = require('./lib/shoppingcart')
 const defaults = require('defaults')
 
 module.exports = async function (config) {
@@ -20,7 +21,7 @@ module.exports = async function (config) {
   })
   const sequelize = setupDatabase(config)
   const UserModel = setupUserModel(config)
-  const ShoppingCartModel = setupShoppingCart(config)
+  const ShoppingCartModel = setupShoppingCartModel(config)
 
   UserModel.hasMany(ShoppingCartModel)
   ShoppingCartModel.belongsTo(UserModel)
@@ -32,7 +33,7 @@ module.exports = async function (config) {
   }
 
   const User = setupUser(UserModel)
-  const ShoppingCart = {}
+  const ShoppingCart = setupShoppingCart(ShoppingCartModel)
 
   return {
     User,
