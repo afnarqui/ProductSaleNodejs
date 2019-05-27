@@ -5,8 +5,9 @@ const chalk = require('chalk')
 const express = require('express')
 const asyncify = require('express-asyncify')
 const api = require('./api')
+const config = require('./config')
 
-const port = process.env.PORT || 8004
+const port = process.env.PORT || config.port
 const app = asyncify(express())
 const server = http.createServer(app)
 

@@ -13,5 +13,6 @@ module.exports = {
   },
   auth: {
     secret: process.env.SECRET || 'afn'
-  }
+  },
+  port: 8004
 }

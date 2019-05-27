@@ -13,7 +13,7 @@ services:
       - .:/app
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: npm start
+    command: npm run prod
   postgres:
     image: postgres:11.2-alpine
     container_name: "psql"

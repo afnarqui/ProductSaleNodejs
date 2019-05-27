@@ -8,6 +8,7 @@ const db = require('./index.js')
 const config = require('./config/index.js')
 const api = asyncify(express.Router())
 const auth = require('express-jwt')
+const uuid = require('uuid/v1')
 let services, User, shoppingCart
 
 api.use('*', async function (req, res, next) {
@@ -62,6 +63,29 @@ api.get('/users/:uuid', async (req, res, next) => {
   }
   res.send({ users })
 })
+
+api.post('/users', auth(config.auth), async (req, res, next) => {
+  let Uuid = null
+  let state = false
+  Uuid = (!req.query.uuid || req.query.uuid === null) ? uuid() : req.query.uuid
+  state = (!req.query.state || req.query.state === false) ? false : req.query.state
+  
+  const newData = {
+   name: req.query.name,
+   uuid: Uuid,
+   state: state,
+   createdAt: "2019-05-23T05:05:02.000Z",
+   updatedAt: "2019-05-26T05:00:00.000Z"
+ }
+ let userNew = []
+ try {
+  userNew = await User.createOrUpdate(newData).catch(handleFatalError)
+  res.send({ userNew })
+ } catch (e) {
+   return next(e)
+ }
+ next()
+});
 
 api.get('/shoppingcarts', async (req, res, next) => {
   let shoppingcart = []
