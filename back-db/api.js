@@ -107,7 +107,7 @@ api.delete('/users', auth(config.auth), async (req, res, next) => {
    return next(e)
  }
  next()
-});
+})
 
 /**
  * crud shoppingcarts all
@@ -192,6 +192,26 @@ api.post('/shoppingcarts', auth(config.auth), async (req, res, next) => {
   })
   
 })
+
+/**
+ * crud shoppingcarts delete
+ */
+api.delete('/shoppingcarts', auth(config.auth), async (req, res, next) => {
+  if(req.query.id === null) {
+     return next(new Error('id is required'))
+   }
+   const deleteData = {
+    id: req.query.id
+  }
+  let shoppingcartsDelete = []
+  try {
+    shoppingcartsDelete = await shoppingCart.deleteShoppingCart(deleteData).catch(handleFatalError)
+   res.send({ shoppingcartsDelete })
+  } catch (e) {
+    return next(e)
+  }
+  next()
+ })
 
 /**
  * return Fatal error
