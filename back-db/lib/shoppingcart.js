@@ -19,6 +19,19 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
       }
     })
   }
+
+  async function deleteShoppingCart (shoppingcarts) {
+    
+    if (!shoppingcarts.id) {
+        return {msg: 'No id specified..'};
+    }
+
+    return !!await ShoppingCartModel.destroy({
+        where: {
+            id: shoppingcarts.id
+        }
+    })
+}
   
   async function findOneShoppingCart (uuid,idProducto) {
     const cond = {
@@ -144,6 +157,7 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
     findAllExistsShoppingCart,
     findOneShoppingCart,
     findByUserId,
-    findByUserIdProductId
+    findByUserIdProductId,
+    deleteShoppingCart
   }
 }
