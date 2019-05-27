@@ -19,6 +19,19 @@ module.exports = function setupUser (UserModel) {
     return result.toJSON()
   }
 
+  async function deleteUser (user) {
+    
+    if (!user.uuid) {
+        return {msg: 'No uuid specified..'};
+    }
+
+    return !!await UserModel.destroy({
+        where: {
+            uuid: user.uuid
+        }
+    });
+}
+
   function findAll () {
     return UserModel.findAll()
   }
@@ -39,6 +52,7 @@ module.exports = function setupUser (UserModel) {
     findAll,
     findConnected,
     findByUuid,
-    createOrUpdate
+    createOrUpdate,
+    deleteUser
   }
 }
