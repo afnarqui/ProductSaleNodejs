@@ -7,12 +7,19 @@ module.exports = function setupUser (UserModel) {
   function findConnected () {
     return UserModel.findAll({
       where: {
-        state: true
+      }
+    })
+  }
+  function findByUuid (uuid) {
+    return UserModel.findOne({
+      where: {
+        uuid
       }
     })
   }
   return {
     findAll,
-    findConnected
+    findConnected,
+    findByUuid
   }
 }

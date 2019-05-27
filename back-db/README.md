@@ -34,10 +34,13 @@ npm i sequelize pg pg-hstore --save
 ```
 docker exec -it psql psql -U postgres
 CREATE ROLE afn WITH LOGIN PASSWORD 'afn';
+CREATE ROLE postgres WITH LOGIN PASSWORD 'postgres';
 CREATE DATABASE sale;
 CREATE DATABASE postgres;
 GRANT ALL PRIVILEGES ON DATABASE sale TO afn;
 GRANT ALL PRIVILEGES ON DATABASE postgres TO afn;
+GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;  
+ssh -i "afnarqui-nodejs.pem" ec2-user@ec2-13-59-191-233.us-east-2.compute.amazonaws.com
 \quit
 \l
 
@@ -55,4 +58,8 @@ npm install -g --save express
 npm install -g http
 npm install --save-dev supertest
 npm i --save express-asyncify
+npm install jsonwebtoken --save
+npm install --save express-jwt
+npm install --save json
+npm install --save-dev nyc
 ```

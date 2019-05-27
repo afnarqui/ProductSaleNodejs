@@ -7,7 +7,8 @@ const asyncify = require('express-asyncify')
 const db = require('./index.js')
 const config = require('./config/index.js')
 const api = asyncify(express.Router())
-let services, User, ShoppingCart
+const auth = require('express-jwt')
+let services, User, shoppingCart
 
 api.use('*', async function (req, res, next) {
   console.log('Connecting to database')
@@ -22,13 +23,20 @@ api.use('*', async function (req, res, next) {
     }
 
     User = services.User
-    ShoppingCart = services.ShoppingCart
+    shoppingCart = services.ShoppingCart
   }
   next()
 })
 
-api.get('/users', async (req, res, next) => {
+api.get('/users', auth(config.auth), async (req, res, next) => {
   debug('request')
+
+  const { user } = req 
+  console.log(user)
+  // if( !user || user.username) {
+  //   return next(new Error('Not authorized'))
+  // }
+  
   let users = []
   try {
     console.log(User)
@@ -39,17 +47,30 @@ api.get('/users', async (req, res, next) => {
   res.send({ users })
 })
 
-api.get('/users/:uuid', (req, res, next) => {
+api.get('/users/:uuid', async (req, res, next) => {
   const { uuid } = req.params
 
-  if (uuid !== 'yyy') {
-    return next(new Error('users not found'))
+  let users
+  try {
+    users = await User.findByUuid(uuid)
+  } catch (e) {
+    return next(e)
   }
-  res.send({ uuid })
+
+  if (!users) {
+    return next(new Error(`users not found with uuid ${uuid}`))
+  }
+  res.send({ users })
 })
 
-api.get('/shoppingcarts', (req, res) => {
-  res.send({})
+api.get('/shoppingcarts', async (req, res, next) => {
+  let shoppingcart = []
+  try {
+    shoppingcart = await shoppingCart.findAllShoppingCart()
+  } catch (e) {
+    return next(e)
+  }
+  res.send({ shoppingcart })
 })
 
 api.get('/shoppingcarts/:id', (req, res) => {
