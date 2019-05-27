@@ -20,22 +20,31 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
     return []
   }
 
-  async function findAllExistsShoppingCart (userId,idProducto,cantidadDisponible,quantity) {
+  async function findAllExistsShoppingCart (dataProcess) {
     let items = [
-      {userId,idProducto,cantidadDisponible,quantity}
+      {
+       userId: dataProcess.userId,
+       idProducto: dataProcess.idProducto,
+       cantidadDisponible: dataProcess.cantidadDisponible,
+       quantity: dataProcess.quantity 
+      }
     ]
+    
     let dataCompleta = []
     dataCompleta.push({
-      userId,idProducto,
-      cantidadDisponible,
-      quantity,exist:false,
+      userId: dataProcess.userId,
+      idProducto: dataProcess.idProducto,
+      cantidadDisponible: dataProcess.cantidadDisponible,
+      quantity: dataProcess.quantity,
+      price:dataProcess.price,
+      exist:false,
       queHago:false,message:'Success'
     })
     return  Promise.each(items,  () => {
       return ShoppingCartModel.findAll({
         where: {
-          idProducto,
-          userId
+          idProducto:dataProcess.idProducto,
+          userId:dataProcess.userId
         }
       })
       .then((res)=>{
@@ -56,13 +65,16 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
         })
         .then((res)=>{
           let quantity = 0
+          let price = 0
           for (var i = 0; i < res.length; i++) {
             if (res[i]['userId'] !== parseInt(dataCompleta[0]['userId'])) {
               quantity+= res[i]['quantity']
+              price+=res[i]['price']
             } 
           }
-          if (dataCompleta[0]['quantity'] + quantity <= cantidadDisponible) {
+          if (dataCompleta[0]['quantity'] + quantity <= dataCompleta[0]['cantidadDisponible']) {
             dataCompleta[0]['queHago'] = true
+            dataCompleta[0]['price'] = price === 0 ? dataCompleta[0]['price'] : price
           }else {
             dataCompleta[0]['queHago'] = false
           }
@@ -86,6 +98,7 @@ module.exports = function setupShoppingCart (ShoppingCartModel) {
           idProducto:dataCompleta[0]['idProducto'],
           quantity: dataCompleta[0]['quantity'],
           userId:dataCompleta[0]['userId'],
+          price:dataCompleta[0]['price'],
         }
       if (dataCompleta[0]['exist']){
         return ShoppingCartModel.update(dataShoppingCart, cond)
