@@ -70,3 +70,14 @@ npm install --save bluebird
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFmbmFycXVpIiwiaWF0IjoxNTU4OTE1NDEyfQ.uNPy_uOd2k6l4CvvjzCZudkPlylMVIliDDA6AViKM2w
 ```
+
+## exec back
+```
+docker exec -it back bash
+npm run setup
+exit
+docker exec -it psql psql -U postgres
+GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;  
+docker exec -it back bash
+npm run start
+```

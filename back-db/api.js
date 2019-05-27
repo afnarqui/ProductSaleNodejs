@@ -122,6 +122,9 @@ api.get('/shoppingcarts', async (req, res, next) => {
   res.send({ shoppingcart })
 })
 
+/**
+ * crud shoppingcarts for userId
+ */
 api.get('/shoppingcarts/:userId', auth(config.auth), async (req, res) => {
   const { userId } = req.params
   let shoppingcart = []
@@ -133,6 +136,9 @@ api.get('/shoppingcarts/:userId', auth(config.auth), async (req, res) => {
   res.send({ shoppingcart })
 })
 
+/**
+ * crud shoppingcarts for userId nad idProducto
+ */
 api.get('/shoppingcarts/:userId/:idProducto', auth(config.auth), async (req, res) => {
   const { userId , idProducto } = req.params
   let shoppingcart = []

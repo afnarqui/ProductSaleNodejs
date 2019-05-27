@@ -14,7 +14,7 @@ services:
       - .:/app
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: node server
+    command: npm start
   postgres:
     image: postgres:11.2-alpine
     container_name: "psql"
